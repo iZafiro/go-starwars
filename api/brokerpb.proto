@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package brokerpb;
+
+option go_package = "api/brokerpb";
+
+message GetFulcrumRequest {
+    string planet = 1;
+    repeated int32 vector = 2;
+}
+
+message GetFulcrumResponse {
+    bool success = 1;
+    int32 fulcrumId = 2;
+}
+
+message GetNumberRebelsRequest {
+    string planet = 1;
+    string city = 2;
+    repeated int32 vector = 3;
+}
+
+message GetNumberRebelsResponse {
+    bool success = 1;
+    int32 number = 2;
+} 
+
+service BrokerService{
+    rpc GetFulcrum (GetFulcrumRequest) returns (GetFulcrumResponse) {};
+    rpc GetNumberRebels (GetNumberRebelsRequest) returns (GetNumberRebelsResponse) {};
+}

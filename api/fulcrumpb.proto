@@ -1,0 +1,75 @@
+syntax = "proto3";
+
+package fulcrumpb;
+
+option go_package = "api/fulcrumpb";
+
+message GetVectorRequest {
+    string planet = 1;
+}
+
+message GetVectorResponse {
+    repeated int32 vector = 1;
+}
+
+message GetNumberRebelsFulcrumRequest {
+    string planet = 1;
+    string city = 2;
+}
+
+message GetNumberRebelsFulcrumResponse {
+    bool success = 1;
+    int32 number = 2;
+}
+
+message AddCityRequest {
+    string planet = 1;
+    string city = 2;
+    int32 number = 3;
+}
+
+message AddCityResponse {
+    bool success = 1;
+    repeated int32 vector = 2;
+}
+
+message UpdateNameRequest {
+    string planet = 1;
+    string oldCity = 2;
+    string newCity = 3;
+}
+
+message UpdateNameResponse {
+    bool success = 1;
+    repeated int32 vector = 2;
+}
+
+message UpdateNumberRequest {
+    string planet = 1;
+    string city = 2;
+    int32 number = 3;
+}
+
+message UpdateNumberResponse {
+    bool success = 1;
+    repeated int32 vector = 2;
+}
+
+message DeleteCityRequest {
+    string planet = 1;
+    string city = 2;
+}
+
+message DeleteCityResponse {
+    bool success = 1;
+    repeated int32 vector = 2;
+}
+
+service FulcrumService{
+    rpc GetVector (GetVectorRequest) returns (GetVectorResponse) {};
+    rpc GetNumberRebelsFulcrum (GetNumberRebelsFulcrumRequest) returns (GetNumberRebelsFulcrumResponse) {};
+    rpc AddCity (AddCityRequest) returns (AddCityResponse) {};
+    rpc UpdateName (UpdateNameRequest) returns (UpdateNameResponse) {};
+    rpc UpdateNumber (UpdateNumberRequest) returns (UpdateNumberResponse) {};
+    rpc DeleteCity (DeleteCityRequest) returns (DeleteCityResponse) {};
+}
