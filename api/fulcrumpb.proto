@@ -22,6 +22,22 @@ message GetNumberRebelsFulcrumResponse {
     int32 number = 2;
 }
 
+message GetLogsRequest {
+    int32 value = 1;
+}
+
+message GetLogsResponse {
+    repeated string logs = 1;
+}
+
+message MergeRequest {
+    repeated string files = 1;
+}
+
+message MergeResponse {
+    bool success = 1;
+}
+
 message AddCityRequest {
     string planet = 1;
     string city = 2;
@@ -68,6 +84,8 @@ message DeleteCityResponse {
 service FulcrumService{
     rpc GetVector (GetVectorRequest) returns (GetVectorResponse) {};
     rpc GetNumberRebelsFulcrum (GetNumberRebelsFulcrumRequest) returns (GetNumberRebelsFulcrumResponse) {};
+    rpc GetLogs (GetLogsRequest) returns (GetLogsResponse) {};
+    rpc Merge (MergeRequest) returns (MergeResponse) {};
     rpc AddCity (AddCityRequest) returns (AddCityResponse) {};
     rpc UpdateName (UpdateNameRequest) returns (UpdateNameResponse) {};
     rpc UpdateNumber (UpdateNumberRequest) returns (UpdateNumberResponse) {};
