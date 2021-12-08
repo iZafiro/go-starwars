@@ -7,12 +7,13 @@ import (
 	"log"
 	"net"
 
-	"google.golang.org/grpc"
 	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strconv"
 	"strings"
+
+	"google.golang.org/grpc"
 )
 
 type server struct{}
@@ -24,11 +25,11 @@ var cf3 fulcrumpb.FulcrumServiceClient
 var s *grpc.Server
 
 func main() {
-  folder := "out"
+	folder := "out"
 	planetVectors = make(map[string][3]int32)
 
 	RemoveContents(folder)
-  
+
 	// Connect to fulcrum2 server
 	fmt.Println("Starting Client...")
 	cc, err := grpc.Dial("0.0.0.0:50052", grpc.WithInsecure())
@@ -204,6 +205,7 @@ func (*server) DeleteCity(ctx context.Context, req *fulcrumpb.DeleteCityRequest)
 		Vector:  vector,
 	}
 	return res, nil
+}
 
 //Añade una ciudad
 func addCity(planet string, city string, value int32) bool {
