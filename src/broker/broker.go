@@ -39,7 +39,7 @@ func main() {
 	defer cc.Close()
 	cf2 = fulcrumpb.NewFulcrumServiceClient(cc)
 
-	// Connect to fulcrum2 server
+	// Connect to fulcrum3 server
 	fmt.Println("Starting Client...")
 	cc, err = grpc.Dial("0.0.0.0:50053", grpc.WithInsecure())
 	if err != nil {

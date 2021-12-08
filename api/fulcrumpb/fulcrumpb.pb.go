@@ -228,6 +228,194 @@ func (x *GetNumberRebelsFulcrumResponse) GetNumber() int32 {
 	return 0
 }
 
+type GetLogsRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Value int32 `protobuf:"varint,1,opt,name=value,proto3" json:"value,omitempty"`
+}
+
+func (x *GetLogsRequest) Reset() {
+	*x = GetLogsRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_api_fulcrumpb_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetLogsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetLogsRequest) ProtoMessage() {}
+
+func (x *GetLogsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_fulcrumpb_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetLogsRequest.ProtoReflect.Descriptor instead.
+func (*GetLogsRequest) Descriptor() ([]byte, []int) {
+	return file_api_fulcrumpb_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *GetLogsRequest) GetValue() int32 {
+	if x != nil {
+		return x.Value
+	}
+	return 0
+}
+
+type GetLogsResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Logs []string `protobuf:"bytes,1,rep,name=logs,proto3" json:"logs,omitempty"`
+}
+
+func (x *GetLogsResponse) Reset() {
+	*x = GetLogsResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_api_fulcrumpb_proto_msgTypes[5]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetLogsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetLogsResponse) ProtoMessage() {}
+
+func (x *GetLogsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_api_fulcrumpb_proto_msgTypes[5]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetLogsResponse.ProtoReflect.Descriptor instead.
+func (*GetLogsResponse) Descriptor() ([]byte, []int) {
+	return file_api_fulcrumpb_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *GetLogsResponse) GetLogs() []string {
+	if x != nil {
+		return x.Logs
+	}
+	return nil
+}
+
+type MergeRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Files []string `protobuf:"bytes,1,rep,name=files,proto3" json:"files,omitempty"`
+}
+
+func (x *MergeRequest) Reset() {
+	*x = MergeRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_api_fulcrumpb_proto_msgTypes[6]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *MergeRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MergeRequest) ProtoMessage() {}
+
+func (x *MergeRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_fulcrumpb_proto_msgTypes[6]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MergeRequest.ProtoReflect.Descriptor instead.
+func (*MergeRequest) Descriptor() ([]byte, []int) {
+	return file_api_fulcrumpb_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *MergeRequest) GetFiles() []string {
+	if x != nil {
+		return x.Files
+	}
+	return nil
+}
+
+type MergeResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Success bool `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+}
+
+func (x *MergeResponse) Reset() {
+	*x = MergeResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_api_fulcrumpb_proto_msgTypes[7]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *MergeResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MergeResponse) ProtoMessage() {}
+
+func (x *MergeResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_api_fulcrumpb_proto_msgTypes[7]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MergeResponse.ProtoReflect.Descriptor instead.
+func (*MergeResponse) Descriptor() ([]byte, []int) {
+	return file_api_fulcrumpb_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *MergeResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
 type AddCityRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -241,7 +429,7 @@ type AddCityRequest struct {
 func (x *AddCityRequest) Reset() {
 	*x = AddCityRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_fulcrumpb_proto_msgTypes[4]
+		mi := &file_api_fulcrumpb_proto_msgTypes[8]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -254,7 +442,7 @@ func (x *AddCityRequest) String() string {
 func (*AddCityRequest) ProtoMessage() {}
 
 func (x *AddCityRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_fulcrumpb_proto_msgTypes[4]
+	mi := &file_api_fulcrumpb_proto_msgTypes[8]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -267,7 +455,7 @@ func (x *AddCityRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddCityRequest.ProtoReflect.Descriptor instead.
 func (*AddCityRequest) Descriptor() ([]byte, []int) {
-	return file_api_fulcrumpb_proto_rawDescGZIP(), []int{4}
+	return file_api_fulcrumpb_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *AddCityRequest) GetPlanet() string {
@@ -303,7 +491,7 @@ type AddCityResponse struct {
 func (x *AddCityResponse) Reset() {
 	*x = AddCityResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_fulcrumpb_proto_msgTypes[5]
+		mi := &file_api_fulcrumpb_proto_msgTypes[9]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -316,7 +504,7 @@ func (x *AddCityResponse) String() string {
 func (*AddCityResponse) ProtoMessage() {}
 
 func (x *AddCityResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_fulcrumpb_proto_msgTypes[5]
+	mi := &file_api_fulcrumpb_proto_msgTypes[9]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -329,7 +517,7 @@ func (x *AddCityResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AddCityResponse.ProtoReflect.Descriptor instead.
 func (*AddCityResponse) Descriptor() ([]byte, []int) {
-	return file_api_fulcrumpb_proto_rawDescGZIP(), []int{5}
+	return file_api_fulcrumpb_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *AddCityResponse) GetSuccess() bool {
@@ -359,7 +547,7 @@ type UpdateNameRequest struct {
 func (x *UpdateNameRequest) Reset() {
 	*x = UpdateNameRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_fulcrumpb_proto_msgTypes[6]
+		mi := &file_api_fulcrumpb_proto_msgTypes[10]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -372,7 +560,7 @@ func (x *UpdateNameRequest) String() string {
 func (*UpdateNameRequest) ProtoMessage() {}
 
 func (x *UpdateNameRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_fulcrumpb_proto_msgTypes[6]
+	mi := &file_api_fulcrumpb_proto_msgTypes[10]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -385,7 +573,7 @@ func (x *UpdateNameRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateNameRequest.ProtoReflect.Descriptor instead.
 func (*UpdateNameRequest) Descriptor() ([]byte, []int) {
-	return file_api_fulcrumpb_proto_rawDescGZIP(), []int{6}
+	return file_api_fulcrumpb_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *UpdateNameRequest) GetPlanet() string {
@@ -421,7 +609,7 @@ type UpdateNameResponse struct {
 func (x *UpdateNameResponse) Reset() {
 	*x = UpdateNameResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_fulcrumpb_proto_msgTypes[7]
+		mi := &file_api_fulcrumpb_proto_msgTypes[11]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -434,7 +622,7 @@ func (x *UpdateNameResponse) String() string {
 func (*UpdateNameResponse) ProtoMessage() {}
 
 func (x *UpdateNameResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_fulcrumpb_proto_msgTypes[7]
+	mi := &file_api_fulcrumpb_proto_msgTypes[11]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -447,7 +635,7 @@ func (x *UpdateNameResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateNameResponse.ProtoReflect.Descriptor instead.
 func (*UpdateNameResponse) Descriptor() ([]byte, []int) {
-	return file_api_fulcrumpb_proto_rawDescGZIP(), []int{7}
+	return file_api_fulcrumpb_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *UpdateNameResponse) GetSuccess() bool {
@@ -477,7 +665,7 @@ type UpdateNumberRequest struct {
 func (x *UpdateNumberRequest) Reset() {
 	*x = UpdateNumberRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_fulcrumpb_proto_msgTypes[8]
+		mi := &file_api_fulcrumpb_proto_msgTypes[12]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -490,7 +678,7 @@ func (x *UpdateNumberRequest) String() string {
 func (*UpdateNumberRequest) ProtoMessage() {}
 
 func (x *UpdateNumberRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_fulcrumpb_proto_msgTypes[8]
+	mi := &file_api_fulcrumpb_proto_msgTypes[12]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -503,7 +691,7 @@ func (x *UpdateNumberRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateNumberRequest.ProtoReflect.Descriptor instead.
 func (*UpdateNumberRequest) Descriptor() ([]byte, []int) {
-	return file_api_fulcrumpb_proto_rawDescGZIP(), []int{8}
+	return file_api_fulcrumpb_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *UpdateNumberRequest) GetPlanet() string {
@@ -539,7 +727,7 @@ type UpdateNumberResponse struct {
 func (x *UpdateNumberResponse) Reset() {
 	*x = UpdateNumberResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_fulcrumpb_proto_msgTypes[9]
+		mi := &file_api_fulcrumpb_proto_msgTypes[13]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -552,7 +740,7 @@ func (x *UpdateNumberResponse) String() string {
 func (*UpdateNumberResponse) ProtoMessage() {}
 
 func (x *UpdateNumberResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_fulcrumpb_proto_msgTypes[9]
+	mi := &file_api_fulcrumpb_proto_msgTypes[13]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -565,7 +753,7 @@ func (x *UpdateNumberResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateNumberResponse.ProtoReflect.Descriptor instead.
 func (*UpdateNumberResponse) Descriptor() ([]byte, []int) {
-	return file_api_fulcrumpb_proto_rawDescGZIP(), []int{9}
+	return file_api_fulcrumpb_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *UpdateNumberResponse) GetSuccess() bool {
@@ -594,7 +782,7 @@ type DeleteCityRequest struct {
 func (x *DeleteCityRequest) Reset() {
 	*x = DeleteCityRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_fulcrumpb_proto_msgTypes[10]
+		mi := &file_api_fulcrumpb_proto_msgTypes[14]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -607,7 +795,7 @@ func (x *DeleteCityRequest) String() string {
 func (*DeleteCityRequest) ProtoMessage() {}
 
 func (x *DeleteCityRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_fulcrumpb_proto_msgTypes[10]
+	mi := &file_api_fulcrumpb_proto_msgTypes[14]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -620,7 +808,7 @@ func (x *DeleteCityRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteCityRequest.ProtoReflect.Descriptor instead.
 func (*DeleteCityRequest) Descriptor() ([]byte, []int) {
-	return file_api_fulcrumpb_proto_rawDescGZIP(), []int{10}
+	return file_api_fulcrumpb_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *DeleteCityRequest) GetPlanet() string {
@@ -649,7 +837,7 @@ type DeleteCityResponse struct {
 func (x *DeleteCityResponse) Reset() {
 	*x = DeleteCityResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_fulcrumpb_proto_msgTypes[11]
+		mi := &file_api_fulcrumpb_proto_msgTypes[15]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -662,7 +850,7 @@ func (x *DeleteCityResponse) String() string {
 func (*DeleteCityResponse) ProtoMessage() {}
 
 func (x *DeleteCityResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_fulcrumpb_proto_msgTypes[11]
+	mi := &file_api_fulcrumpb_proto_msgTypes[15]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -675,7 +863,7 @@ func (x *DeleteCityResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteCityResponse.ProtoReflect.Descriptor instead.
 func (*DeleteCityResponse) Descriptor() ([]byte, []int) {
-	return file_api_fulcrumpb_proto_rawDescGZIP(), []int{11}
+	return file_api_fulcrumpb_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *DeleteCityResponse) GetSuccess() bool {
@@ -712,7 +900,17 @@ var file_api_fulcrumpb_proto_rawDesc = []byte{
 	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x73, 0x75, 0x63, 0x63,
 	0x65, 0x73, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65,
 	0x73, 0x73, 0x12, 0x16, 0x0a, 0x06, 0x6e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x18, 0x02, 0x20, 0x01,
-	0x28, 0x05, 0x52, 0x06, 0x6e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x22, 0x54, 0x0a, 0x0e, 0x41, 0x64,
+	0x28, 0x05, 0x52, 0x06, 0x6e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x22, 0x26, 0x0a, 0x0e, 0x47, 0x65,
+	0x74, 0x4c, 0x6f, 0x67, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x14, 0x0a, 0x05,
+	0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x05, 0x52, 0x05, 0x76, 0x61, 0x6c,
+	0x75, 0x65, 0x22, 0x25, 0x0a, 0x0f, 0x47, 0x65, 0x74, 0x4c, 0x6f, 0x67, 0x73, 0x52, 0x65, 0x73,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x6c, 0x6f, 0x67, 0x73, 0x18, 0x01, 0x20,
+	0x03, 0x28, 0x09, 0x52, 0x04, 0x6c, 0x6f, 0x67, 0x73, 0x22, 0x24, 0x0a, 0x0c, 0x4d, 0x65, 0x72,
+	0x67, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x14, 0x0a, 0x05, 0x66, 0x69, 0x6c,
+	0x65, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x09, 0x52, 0x05, 0x66, 0x69, 0x6c, 0x65, 0x73, 0x22,
+	0x29, 0x0a, 0x0d, 0x4d, 0x65, 0x72, 0x67, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
+	0x12, 0x18, 0x0a, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x08, 0x52, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x22, 0x54, 0x0a, 0x0e, 0x41, 0x64,
 	0x64, 0x43, 0x69, 0x74, 0x79, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x16, 0x0a, 0x06,
 	0x70, 0x6c, 0x61, 0x6e, 0x65, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x70, 0x6c,
 	0x61, 0x6e, 0x65, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x63, 0x69, 0x74, 0x79, 0x18, 0x02, 0x20, 0x01,
@@ -751,7 +949,7 @@ var file_api_fulcrumpb_proto_rawDesc = []byte{
 	0x74, 0x79, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x73, 0x75,
 	0x63, 0x63, 0x65, 0x73, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x73, 0x75, 0x63,
 	0x63, 0x65, 0x73, 0x73, 0x12, 0x16, 0x0a, 0x06, 0x76, 0x65, 0x63, 0x74, 0x6f, 0x72, 0x18, 0x02,
-	0x20, 0x03, 0x28, 0x05, 0x52, 0x06, 0x76, 0x65, 0x63, 0x74, 0x6f, 0x72, 0x32, 0xfc, 0x03, 0x0a,
+	0x20, 0x03, 0x28, 0x05, 0x52, 0x06, 0x76, 0x65, 0x63, 0x74, 0x6f, 0x72, 0x32, 0xfe, 0x04, 0x0a,
 	0x0e, 0x46, 0x75, 0x6c, 0x63, 0x72, 0x75, 0x6d, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12,
 	0x48, 0x0a, 0x09, 0x47, 0x65, 0x74, 0x56, 0x65, 0x63, 0x74, 0x6f, 0x72, 0x12, 0x1b, 0x2e, 0x66,
 	0x75, 0x6c, 0x63, 0x72, 0x75, 0x6d, 0x70, 0x62, 0x2e, 0x47, 0x65, 0x74, 0x56, 0x65, 0x63, 0x74,
@@ -764,28 +962,36 @@ var file_api_fulcrumpb_proto_rawDesc = []byte{
 	0x75, 0x6c, 0x63, 0x72, 0x75, 0x6d, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x29, 0x2e,
 	0x66, 0x75, 0x6c, 0x63, 0x72, 0x75, 0x6d, 0x70, 0x62, 0x2e, 0x47, 0x65, 0x74, 0x4e, 0x75, 0x6d,
 	0x62, 0x65, 0x72, 0x52, 0x65, 0x62, 0x65, 0x6c, 0x73, 0x46, 0x75, 0x6c, 0x63, 0x72, 0x75, 0x6d,
-	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x42, 0x0a, 0x07, 0x41, 0x64,
-	0x64, 0x43, 0x69, 0x74, 0x79, 0x12, 0x19, 0x2e, 0x66, 0x75, 0x6c, 0x63, 0x72, 0x75, 0x6d, 0x70,
-	0x62, 0x2e, 0x41, 0x64, 0x64, 0x43, 0x69, 0x74, 0x79, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
-	0x1a, 0x1a, 0x2e, 0x66, 0x75, 0x6c, 0x63, 0x72, 0x75, 0x6d, 0x70, 0x62, 0x2e, 0x41, 0x64, 0x64,
-	0x43, 0x69, 0x74, 0x79, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x4b,
-	0x0a, 0x0a, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x1c, 0x2e, 0x66,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x42, 0x0a, 0x07, 0x47, 0x65,
+	0x74, 0x4c, 0x6f, 0x67, 0x73, 0x12, 0x19, 0x2e, 0x66, 0x75, 0x6c, 0x63, 0x72, 0x75, 0x6d, 0x70,
+	0x62, 0x2e, 0x47, 0x65, 0x74, 0x4c, 0x6f, 0x67, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x1a, 0x1a, 0x2e, 0x66, 0x75, 0x6c, 0x63, 0x72, 0x75, 0x6d, 0x70, 0x62, 0x2e, 0x47, 0x65, 0x74,
+	0x4c, 0x6f, 0x67, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x3c,
+	0x0a, 0x05, 0x4d, 0x65, 0x72, 0x67, 0x65, 0x12, 0x17, 0x2e, 0x66, 0x75, 0x6c, 0x63, 0x72, 0x75,
+	0x6d, 0x70, 0x62, 0x2e, 0x4d, 0x65, 0x72, 0x67, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x1a, 0x18, 0x2e, 0x66, 0x75, 0x6c, 0x63, 0x72, 0x75, 0x6d, 0x70, 0x62, 0x2e, 0x4d, 0x65, 0x72,
+	0x67, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x42, 0x0a, 0x07,
+	0x41, 0x64, 0x64, 0x43, 0x69, 0x74, 0x79, 0x12, 0x19, 0x2e, 0x66, 0x75, 0x6c, 0x63, 0x72, 0x75,
+	0x6d, 0x70, 0x62, 0x2e, 0x41, 0x64, 0x64, 0x43, 0x69, 0x74, 0x79, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x1a, 0x1a, 0x2e, 0x66, 0x75, 0x6c, 0x63, 0x72, 0x75, 0x6d, 0x70, 0x62, 0x2e, 0x41,
+	0x64, 0x64, 0x43, 0x69, 0x74, 0x79, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00,
+	0x12, 0x4b, 0x0a, 0x0a, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x1c,
+	0x2e, 0x66, 0x75, 0x6c, 0x63, 0x72, 0x75, 0x6d, 0x70, 0x62, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74,
+	0x65, 0x4e, 0x61, 0x6d, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1d, 0x2e, 0x66,
 	0x75, 0x6c, 0x63, 0x72, 0x75, 0x6d, 0x70, 0x62, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x4e,
-	0x61, 0x6d, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1d, 0x2e, 0x66, 0x75, 0x6c,
-	0x63, 0x72, 0x75, 0x6d, 0x70, 0x62, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x4e, 0x61, 0x6d,
-	0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x51, 0x0a, 0x0c, 0x55,
-	0x70, 0x64, 0x61, 0x74, 0x65, 0x4e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x12, 0x1e, 0x2e, 0x66, 0x75,
-	0x6c, 0x63, 0x72, 0x75, 0x6d, 0x70, 0x62, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x4e, 0x75,
-	0x6d, 0x62, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1f, 0x2e, 0x66, 0x75,
-	0x6c, 0x63, 0x72, 0x75, 0x6d, 0x70, 0x62, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x4e, 0x75,
-	0x6d, 0x62, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x4b,
-	0x0a, 0x0a, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x43, 0x69, 0x74, 0x79, 0x12, 0x1c, 0x2e, 0x66,
+	0x61, 0x6d, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x51, 0x0a,
+	0x0c, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x4e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x12, 0x1e, 0x2e,
+	0x66, 0x75, 0x6c, 0x63, 0x72, 0x75, 0x6d, 0x70, 0x62, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65,
+	0x4e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1f, 0x2e,
+	0x66, 0x75, 0x6c, 0x63, 0x72, 0x75, 0x6d, 0x70, 0x62, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65,
+	0x4e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00,
+	0x12, 0x4b, 0x0a, 0x0a, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x43, 0x69, 0x74, 0x79, 0x12, 0x1c,
+	0x2e, 0x66, 0x75, 0x6c, 0x63, 0x72, 0x75, 0x6d, 0x70, 0x62, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74,
+	0x65, 0x43, 0x69, 0x74, 0x79, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1d, 0x2e, 0x66,
 	0x75, 0x6c, 0x63, 0x72, 0x75, 0x6d, 0x70, 0x62, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x43,
-	0x69, 0x74, 0x79, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1d, 0x2e, 0x66, 0x75, 0x6c,
-	0x63, 0x72, 0x75, 0x6d, 0x70, 0x62, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x43, 0x69, 0x74,
-	0x79, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x42, 0x0f, 0x5a, 0x0d, 0x61,
-	0x70, 0x69, 0x2f, 0x66, 0x75, 0x6c, 0x63, 0x72, 0x75, 0x6d, 0x70, 0x62, 0x62, 0x06, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x33,
+	0x69, 0x74, 0x79, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x42, 0x0f, 0x5a,
+	0x0d, 0x61, 0x70, 0x69, 0x2f, 0x66, 0x75, 0x6c, 0x63, 0x72, 0x75, 0x6d, 0x70, 0x62, 0x62, 0x06,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -800,36 +1006,44 @@ func file_api_fulcrumpb_proto_rawDescGZIP() []byte {
 	return file_api_fulcrumpb_proto_rawDescData
 }
 
-var file_api_fulcrumpb_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
+var file_api_fulcrumpb_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
 var file_api_fulcrumpb_proto_goTypes = []interface{}{
 	(*GetVectorRequest)(nil),               // 0: fulcrumpb.GetVectorRequest
 	(*GetVectorResponse)(nil),              // 1: fulcrumpb.GetVectorResponse
 	(*GetNumberRebelsFulcrumRequest)(nil),  // 2: fulcrumpb.GetNumberRebelsFulcrumRequest
 	(*GetNumberRebelsFulcrumResponse)(nil), // 3: fulcrumpb.GetNumberRebelsFulcrumResponse
-	(*AddCityRequest)(nil),                 // 4: fulcrumpb.AddCityRequest
-	(*AddCityResponse)(nil),                // 5: fulcrumpb.AddCityResponse
-	(*UpdateNameRequest)(nil),              // 6: fulcrumpb.UpdateNameRequest
-	(*UpdateNameResponse)(nil),             // 7: fulcrumpb.UpdateNameResponse
-	(*UpdateNumberRequest)(nil),            // 8: fulcrumpb.UpdateNumberRequest
-	(*UpdateNumberResponse)(nil),           // 9: fulcrumpb.UpdateNumberResponse
-	(*DeleteCityRequest)(nil),              // 10: fulcrumpb.DeleteCityRequest
-	(*DeleteCityResponse)(nil),             // 11: fulcrumpb.DeleteCityResponse
+	(*GetLogsRequest)(nil),                 // 4: fulcrumpb.GetLogsRequest
+	(*GetLogsResponse)(nil),                // 5: fulcrumpb.GetLogsResponse
+	(*MergeRequest)(nil),                   // 6: fulcrumpb.MergeRequest
+	(*MergeResponse)(nil),                  // 7: fulcrumpb.MergeResponse
+	(*AddCityRequest)(nil),                 // 8: fulcrumpb.AddCityRequest
+	(*AddCityResponse)(nil),                // 9: fulcrumpb.AddCityResponse
+	(*UpdateNameRequest)(nil),              // 10: fulcrumpb.UpdateNameRequest
+	(*UpdateNameResponse)(nil),             // 11: fulcrumpb.UpdateNameResponse
+	(*UpdateNumberRequest)(nil),            // 12: fulcrumpb.UpdateNumberRequest
+	(*UpdateNumberResponse)(nil),           // 13: fulcrumpb.UpdateNumberResponse
+	(*DeleteCityRequest)(nil),              // 14: fulcrumpb.DeleteCityRequest
+	(*DeleteCityResponse)(nil),             // 15: fulcrumpb.DeleteCityResponse
 }
 var file_api_fulcrumpb_proto_depIdxs = []int32{
 	0,  // 0: fulcrumpb.FulcrumService.GetVector:input_type -> fulcrumpb.GetVectorRequest
 	2,  // 1: fulcrumpb.FulcrumService.GetNumberRebelsFulcrum:input_type -> fulcrumpb.GetNumberRebelsFulcrumRequest
-	4,  // 2: fulcrumpb.FulcrumService.AddCity:input_type -> fulcrumpb.AddCityRequest
-	6,  // 3: fulcrumpb.FulcrumService.UpdateName:input_type -> fulcrumpb.UpdateNameRequest
-	8,  // 4: fulcrumpb.FulcrumService.UpdateNumber:input_type -> fulcrumpb.UpdateNumberRequest
-	10, // 5: fulcrumpb.FulcrumService.DeleteCity:input_type -> fulcrumpb.DeleteCityRequest
-	1,  // 6: fulcrumpb.FulcrumService.GetVector:output_type -> fulcrumpb.GetVectorResponse
-	3,  // 7: fulcrumpb.FulcrumService.GetNumberRebelsFulcrum:output_type -> fulcrumpb.GetNumberRebelsFulcrumResponse
-	5,  // 8: fulcrumpb.FulcrumService.AddCity:output_type -> fulcrumpb.AddCityResponse
-	7,  // 9: fulcrumpb.FulcrumService.UpdateName:output_type -> fulcrumpb.UpdateNameResponse
-	9,  // 10: fulcrumpb.FulcrumService.UpdateNumber:output_type -> fulcrumpb.UpdateNumberResponse
-	11, // 11: fulcrumpb.FulcrumService.DeleteCity:output_type -> fulcrumpb.DeleteCityResponse
-	6,  // [6:12] is the sub-list for method output_type
-	0,  // [0:6] is the sub-list for method input_type
+	4,  // 2: fulcrumpb.FulcrumService.GetLogs:input_type -> fulcrumpb.GetLogsRequest
+	6,  // 3: fulcrumpb.FulcrumService.Merge:input_type -> fulcrumpb.MergeRequest
+	8,  // 4: fulcrumpb.FulcrumService.AddCity:input_type -> fulcrumpb.AddCityRequest
+	10, // 5: fulcrumpb.FulcrumService.UpdateName:input_type -> fulcrumpb.UpdateNameRequest
+	12, // 6: fulcrumpb.FulcrumService.UpdateNumber:input_type -> fulcrumpb.UpdateNumberRequest
+	14, // 7: fulcrumpb.FulcrumService.DeleteCity:input_type -> fulcrumpb.DeleteCityRequest
+	1,  // 8: fulcrumpb.FulcrumService.GetVector:output_type -> fulcrumpb.GetVectorResponse
+	3,  // 9: fulcrumpb.FulcrumService.GetNumberRebelsFulcrum:output_type -> fulcrumpb.GetNumberRebelsFulcrumResponse
+	5,  // 10: fulcrumpb.FulcrumService.GetLogs:output_type -> fulcrumpb.GetLogsResponse
+	7,  // 11: fulcrumpb.FulcrumService.Merge:output_type -> fulcrumpb.MergeResponse
+	9,  // 12: fulcrumpb.FulcrumService.AddCity:output_type -> fulcrumpb.AddCityResponse
+	11, // 13: fulcrumpb.FulcrumService.UpdateName:output_type -> fulcrumpb.UpdateNameResponse
+	13, // 14: fulcrumpb.FulcrumService.UpdateNumber:output_type -> fulcrumpb.UpdateNumberResponse
+	15, // 15: fulcrumpb.FulcrumService.DeleteCity:output_type -> fulcrumpb.DeleteCityResponse
+	8,  // [8:16] is the sub-list for method output_type
+	0,  // [0:8] is the sub-list for method input_type
 	0,  // [0:0] is the sub-list for extension type_name
 	0,  // [0:0] is the sub-list for extension extendee
 	0,  // [0:0] is the sub-list for field type_name
@@ -890,7 +1104,7 @@ func file_api_fulcrumpb_proto_init() {
 			}
 		}
 		file_api_fulcrumpb_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AddCityRequest); i {
+			switch v := v.(*GetLogsRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -902,7 +1116,7 @@ func file_api_fulcrumpb_proto_init() {
 			}
 		}
 		file_api_fulcrumpb_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AddCityResponse); i {
+			switch v := v.(*GetLogsResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -914,7 +1128,7 @@ func file_api_fulcrumpb_proto_init() {
 			}
 		}
 		file_api_fulcrumpb_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*UpdateNameRequest); i {
+			switch v := v.(*MergeRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -926,7 +1140,7 @@ func file_api_fulcrumpb_proto_init() {
 			}
 		}
 		file_api_fulcrumpb_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*UpdateNameResponse); i {
+			switch v := v.(*MergeResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -938,7 +1152,7 @@ func file_api_fulcrumpb_proto_init() {
 			}
 		}
 		file_api_fulcrumpb_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*UpdateNumberRequest); i {
+			switch v := v.(*AddCityRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -950,7 +1164,7 @@ func file_api_fulcrumpb_proto_init() {
 			}
 		}
 		file_api_fulcrumpb_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*UpdateNumberResponse); i {
+			switch v := v.(*AddCityResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -962,7 +1176,7 @@ func file_api_fulcrumpb_proto_init() {
 			}
 		}
 		file_api_fulcrumpb_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DeleteCityRequest); i {
+			switch v := v.(*UpdateNameRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -974,6 +1188,54 @@ func file_api_fulcrumpb_proto_init() {
 			}
 		}
 		file_api_fulcrumpb_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UpdateNameResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_api_fulcrumpb_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UpdateNumberRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_api_fulcrumpb_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UpdateNumberResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_api_fulcrumpb_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DeleteCityRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_api_fulcrumpb_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*DeleteCityResponse); i {
 			case 0:
 				return &v.state
@@ -992,7 +1254,7 @@ func file_api_fulcrumpb_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_api_fulcrumpb_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   12,
+			NumMessages:   16,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
@@ -1020,6 +1282,8 @@ const _ = grpc.SupportPackageIsVersion6
 type FulcrumServiceClient interface {
 	GetVector(ctx context.Context, in *GetVectorRequest, opts ...grpc.CallOption) (*GetVectorResponse, error)
 	GetNumberRebelsFulcrum(ctx context.Context, in *GetNumberRebelsFulcrumRequest, opts ...grpc.CallOption) (*GetNumberRebelsFulcrumResponse, error)
+	GetLogs(ctx context.Context, in *GetLogsRequest, opts ...grpc.CallOption) (*GetLogsResponse, error)
+	Merge(ctx context.Context, in *MergeRequest, opts ...grpc.CallOption) (*MergeResponse, error)
 	AddCity(ctx context.Context, in *AddCityRequest, opts ...grpc.CallOption) (*AddCityResponse, error)
 	UpdateName(ctx context.Context, in *UpdateNameRequest, opts ...grpc.CallOption) (*UpdateNameResponse, error)
 	UpdateNumber(ctx context.Context, in *UpdateNumberRequest, opts ...grpc.CallOption) (*UpdateNumberResponse, error)
@@ -1046,6 +1310,24 @@ func (c *fulcrumServiceClient) GetVector(ctx context.Context, in *GetVectorReque
 func (c *fulcrumServiceClient) GetNumberRebelsFulcrum(ctx context.Context, in *GetNumberRebelsFulcrumRequest, opts ...grpc.CallOption) (*GetNumberRebelsFulcrumResponse, error) {
 	out := new(GetNumberRebelsFulcrumResponse)
 	err := c.cc.Invoke(ctx, "/fulcrumpb.FulcrumService/GetNumberRebelsFulcrum", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *fulcrumServiceClient) GetLogs(ctx context.Context, in *GetLogsRequest, opts ...grpc.CallOption) (*GetLogsResponse, error) {
+	out := new(GetLogsResponse)
+	err := c.cc.Invoke(ctx, "/fulcrumpb.FulcrumService/GetLogs", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *fulcrumServiceClient) Merge(ctx context.Context, in *MergeRequest, opts ...grpc.CallOption) (*MergeResponse, error) {
+	out := new(MergeResponse)
+	err := c.cc.Invoke(ctx, "/fulcrumpb.FulcrumService/Merge", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1092,6 +1374,8 @@ func (c *fulcrumServiceClient) DeleteCity(ctx context.Context, in *DeleteCityReq
 type FulcrumServiceServer interface {
 	GetVector(context.Context, *GetVectorRequest) (*GetVectorResponse, error)
 	GetNumberRebelsFulcrum(context.Context, *GetNumberRebelsFulcrumRequest) (*GetNumberRebelsFulcrumResponse, error)
+	GetLogs(context.Context, *GetLogsRequest) (*GetLogsResponse, error)
+	Merge(context.Context, *MergeRequest) (*MergeResponse, error)
 	AddCity(context.Context, *AddCityRequest) (*AddCityResponse, error)
 	UpdateName(context.Context, *UpdateNameRequest) (*UpdateNameResponse, error)
 	UpdateNumber(context.Context, *UpdateNumberRequest) (*UpdateNumberResponse, error)
@@ -1107,6 +1391,12 @@ func (*UnimplementedFulcrumServiceServer) GetVector(context.Context, *GetVectorR
 }
 func (*UnimplementedFulcrumServiceServer) GetNumberRebelsFulcrum(context.Context, *GetNumberRebelsFulcrumRequest) (*GetNumberRebelsFulcrumResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetNumberRebelsFulcrum not implemented")
+}
+func (*UnimplementedFulcrumServiceServer) GetLogs(context.Context, *GetLogsRequest) (*GetLogsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetLogs not implemented")
+}
+func (*UnimplementedFulcrumServiceServer) Merge(context.Context, *MergeRequest) (*MergeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Merge not implemented")
 }
 func (*UnimplementedFulcrumServiceServer) AddCity(context.Context, *AddCityRequest) (*AddCityResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddCity not implemented")
@@ -1157,6 +1447,42 @@ func _FulcrumService_GetNumberRebelsFulcrum_Handler(srv interface{}, ctx context
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(FulcrumServiceServer).GetNumberRebelsFulcrum(ctx, req.(*GetNumberRebelsFulcrumRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FulcrumService_GetLogs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetLogsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FulcrumServiceServer).GetLogs(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/fulcrumpb.FulcrumService/GetLogs",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FulcrumServiceServer).GetLogs(ctx, req.(*GetLogsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FulcrumService_Merge_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MergeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FulcrumServiceServer).Merge(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/fulcrumpb.FulcrumService/Merge",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FulcrumServiceServer).Merge(ctx, req.(*MergeRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1244,6 +1570,14 @@ var _FulcrumService_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetNumberRebelsFulcrum",
 			Handler:    _FulcrumService_GetNumberRebelsFulcrum_Handler,
+		},
+		{
+			MethodName: "GetLogs",
+			Handler:    _FulcrumService_GetLogs_Handler,
+		},
+		{
+			MethodName: "Merge",
+			Handler:    _FulcrumService_Merge_Handler,
 		},
 		{
 			MethodName: "AddCity",
