@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"go-starwars/api/fulcrumpb"
+	"go-starwars/src/concerns"
 	"log"
 	"net"
 
@@ -12,9 +13,30 @@ import (
 
 type server struct{}
 
+var planetVectors map[string][3]int32
+var folder string
+var node int32
+
 var s *grpc.Server
 
 func main() {
+	planetVectors = make(map[string][3]int32)
+	folder = "out/"
+	node = int32(3)
+	/*
+		Local test
+		concerns.CRemoveContents("out")
+		_, planetVectors = concerns.CAddCity("planeta", "uwu", int32(100), planetVectors, folder, node)
+		_, planetVectors = concerns.CUpdateName("planeta", "uwu", "awa", planetVectors, folder, node)
+		_, planetVectors = concerns.CUpdateNumber("planeta", "awa", int32(50), planetVectors, folder, node)
+		_, planetVectors = concerns.CAddCity("planeta", "owo", int32(100), planetVectors, folder, node)
+		_, planetVectors = concerns.CAddCity("planeta", "iwi", int32(100), planetVectors, folder, node)
+		_, planetVectors = concerns.CAddCity("planeta2", "xd", int32(100), planetVectors, folder, node)
+		_, planetVectors = concerns.CDeleteCity("planeta", "awa", planetVectors, folder, node)
+		planetVectors = concerns.CMerge([]string{"planeta\n1, 2, 3\nlinea1\nlinea2\n..."}, planetVectors, folder)
+		log.Println(planetVectors)
+	*/
+
 	// Start server
 	fmt.Println("Starting server...")
 	l, err := net.Listen("tcp", "0.0.0.0:50053")
@@ -32,14 +54,12 @@ func (*server) GetVector(ctx context.Context, req *fulcrumpb.GetVectorRequest) (
 	// Unpack request
 	planet := req.GetPlanet()
 
-	fmt.Println(planet)
-
 	// Pack response
-	vector := []int32{0, 0, 0}
+	vector := concerns.CGetVector(planet, planetVectors)
 
 	// Send response
 	res := &fulcrumpb.GetVectorResponse{
-		Vector: vector,
+		Vector: vector[:],
 	}
 	return res, nil
 }
@@ -49,11 +69,8 @@ func (*server) GetNumberRebelsFulcrum(ctx context.Context, req *fulcrumpb.GetNum
 	planet := req.GetPlanet()
 	city := req.GetCity()
 
-	fmt.Println(planet, city)
-
 	// Pack response
-	success := false
-	number := -1
+	success, number := concerns.CGetRebels(planet, city, folder)
 
 	// Send response
 	res := &fulcrumpb.GetNumberRebelsFulcrumResponse{
@@ -64,13 +81,9 @@ func (*server) GetNumberRebelsFulcrum(ctx context.Context, req *fulcrumpb.GetNum
 }
 
 func (*server) GetLogs(ctx context.Context, req *fulcrumpb.GetLogsRequest) (*fulcrumpb.GetLogsResponse, error) {
-	// Unpack request
-	value := req.GetValue()
-
-	fmt.Println(value)
 
 	// Pack response
-	logs := []string{}
+	logs := concerns.CGetLogs(planetVectors, folder)
 
 	// Send response
 	res := &fulcrumpb.GetLogsResponse{
@@ -83,10 +96,9 @@ func (*server) Merge(ctx context.Context, req *fulcrumpb.MergeRequest) (*fulcrum
 	// Unpack request
 	files := req.GetFiles()
 
-	fmt.Println(files)
-
 	// Pack response
-	success := false
+	var success bool
+	success, planetVectors = concerns.CMerge(files, planetVectors, folder)
 
 	// Send response
 	res := &fulcrumpb.MergeResponse{
@@ -104,13 +116,14 @@ func (*server) AddCity(ctx context.Context, req *fulcrumpb.AddCityRequest) (*ful
 	fmt.Println(planet, city, number)
 
 	// Pack response
-	success := false
-	vector := []int32{0, 0, 0}
+	var success bool
+	success, planetVectors = concerns.CAddCity(planet, city, number, planetVectors, folder, node)
+	vector := concerns.CGetVector(planet, planetVectors)
 
 	// Send response
 	res := &fulcrumpb.AddCityResponse{
 		Success: success,
-		Vector:  vector,
+		Vector:  vector[:],
 	}
 	return res, nil
 }
@@ -121,16 +134,15 @@ func (*server) UpdateName(ctx context.Context, req *fulcrumpb.UpdateNameRequest)
 	oldCity := req.GetOldCity()
 	newCity := req.GetNewCity()
 
-	fmt.Println(planet, oldCity, newCity)
-
 	// Pack response
-	success := false
-	vector := []int32{0, 0, 0}
+	var success bool
+	success, planetVectors := concerns.CUpdateName(planet, oldCity, newCity, planetVectors, folder, node)
+	vector := concerns.CGetVector(planet, planetVectors)
 
 	// Send response
 	res := &fulcrumpb.UpdateNameResponse{
 		Success: success,
-		Vector:  vector,
+		Vector:  vector[:],
 	}
 	return res, nil
 }
@@ -141,16 +153,15 @@ func (*server) UpdateNumber(ctx context.Context, req *fulcrumpb.UpdateNumberRequ
 	city := req.GetCity()
 	number := req.GetNumber()
 
-	fmt.Println(planet, city, number)
-
 	// Pack response
-	success := false
-	vector := []int32{0, 0, 0}
+	var success bool
+	success, planetVectors = concerns.CUpdateNumber(planet, city, number, planetVectors, folder, node)
+	vector := concerns.CGetVector(planet, planetVectors)
 
 	// Send response
 	res := &fulcrumpb.UpdateNumberResponse{
 		Success: success,
-		Vector:  vector,
+		Vector:  vector[:],
 	}
 	return res, nil
 }
@@ -160,16 +171,15 @@ func (*server) DeleteCity(ctx context.Context, req *fulcrumpb.DeleteCityRequest)
 	planet := req.GetPlanet()
 	city := req.GetCity()
 
-	fmt.Println(planet, city)
-
 	// Pack response
-	success := false
-	vector := []int32{0, 0, 0}
+	var success bool
+	success, planetVectors = concerns.CDeleteCity(planet, city, planetVectors, folder, node)
+	vector := concerns.CGetVector(planet, planetVectors)
 
 	// Send response
 	res := &fulcrumpb.DeleteCityResponse{
 		Success: success,
-		Vector:  vector,
+		Vector:  vector[:],
 	}
 	return res, nil
 }
