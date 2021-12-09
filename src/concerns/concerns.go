@@ -142,14 +142,14 @@ func CDeleteCity(planet string, city string, planetVectors map[string][3]int32, 
 }
 
 //Obtiene la cantidad de rebeldes en una ciudad determinada
-func CGetRebels(planet string, city string, folder string) int32 {
+func CGetRebels(planet string, city string, folder string) (bool, int32) {
+	rebels := int32(-1)
 	input, err := ioutil.ReadFile(folder + "Registro_" + planet + ".txt")
 	if err != nil {
-		log.Fatalln(err)
+		return false, rebels
 	}
 
 	lines := strings.Split(string(input), "\n")
-	rebels := int32(-1)
 
 	for i, line := range lines {
 		if strings.Contains(line, city) {
@@ -157,7 +157,7 @@ func CGetRebels(planet string, city string, folder string) int32 {
 			rebels = int32(aux)
 		}
 	}
-	return rebels
+	return true, rebels
 
 }
 
@@ -214,7 +214,7 @@ func deletePlanet(planet string, folder string) bool {
 	return e == nil
 }
 
-func CMerge(files []string, planetVectors map[string][3]int32, folder string) map[string][3]int32 {
+func CMerge(files []string, planetVectors map[string][3]int32, folder string) (bool, map[string][3]int32) {
 	for file_index := range files {
 		lines := strings.Split(files[file_index], "\n")
 		planet := lines[0]
@@ -228,21 +228,21 @@ func CMerge(files []string, planetVectors map[string][3]int32, folder string) ma
 		for i := 2; i < len(lines); i++ {
 			f, err := os.OpenFile(folder+filename, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 			if err != nil {
-				log.Fatal(err)
+				return false, map[string][3]int32{}
 			}
 			fmt.Fprintln(f, lines[i])
 			if err != nil {
-				fmt.Println(err)
+				return false, map[string][3]int32{}
 			}
 			err = f.Close()
 			if err != nil {
-				fmt.Println(err)
+				return false, map[string][3]int32{}
 			}
 
 		}
 
 	}
-	return planetVectors
+	return true, planetVectors
 
 }
 
