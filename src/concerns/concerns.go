@@ -45,8 +45,8 @@ func CAddCity(planet string, city string, value int32, planetVectors map[string]
 			fmt.Println(err)
 			return false, map[string][3]int32{}
 		}
-		planetVectors = CUpdateVector(planet, planetVectors, node)
-		CUpdateLog("AddCity "+planet+" "+city+" "+fmt.Sprint(value), folder)
+		planetVectors = updateVector(planet, planetVectors, node)
+		updateLog("AddCity "+planet+" "+city+" "+fmt.Sprint(value), folder)
 	}
 	return success, planetVectors
 
@@ -74,8 +74,8 @@ func CUpdateName(planet string, city string, new_value string, planetVectors map
 		log.Fatalln(err)
 	}
 	if success {
-		planetVectors = CUpdateVector(planet, planetVectors, node)
-		CUpdateLog("UpdateName "+planet+" "+city+" "+new_value, folder)
+		planetVectors = updateVector(planet, planetVectors, node)
+		updateLog("UpdateName "+planet+" "+city+" "+new_value, folder)
 	}
 	return success, planetVectors
 
@@ -103,8 +103,8 @@ func CUpdateNumber(planet string, city string, new_value int32, planetVectors ma
 		log.Fatalln(err)
 	}
 	if success {
-		planetVectors = CUpdateVector(planet, planetVectors, node)
-		CUpdateLog("UpdateNumber "+planet+" "+city+" "+fmt.Sprint(new_value), folder)
+		planetVectors = updateVector(planet, planetVectors, node)
+		updateLog("UpdateNumber "+planet+" "+city+" "+fmt.Sprint(new_value), folder)
 	}
 	return success, planetVectors
 
@@ -134,8 +134,8 @@ func CDeleteCity(planet string, city string, planetVectors map[string][3]int32, 
 		log.Fatalln(err)
 	}
 	if success {
-		planetVectors = CUpdateVector(planet, planetVectors, node)
-		CUpdateLog("DeleteCity "+planet+" "+city, folder)
+		planetVectors = updateVector(planet, planetVectors, node)
+		updateLog("DeleteCity "+planet+" "+city, folder)
 	}
 
 	return success, planetVectors
@@ -162,7 +162,7 @@ func CGetRebels(planet string, city string, folder string) int32 {
 }
 
 //Actualiza el Log
-func CUpdateLog(op string, folder string) {
+func updateLog(op string, folder string) {
 	filename := "Logs.txt"
 	f, err := os.OpenFile(folder+filename, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
@@ -194,28 +194,24 @@ func CGetLogs(planetVectors map[string][3]int32, folder string) []string {
 	for i := range lines {
 		if len(strings.Split(lines[i], " ")) > 1 {
 			city := strings.Split(lines[i], " ")[1]
-			log.Println(city)
 			logs = append(logs, lines[i]+"\n"+fmt.Sprint(planetVectors[city][0])+", "+fmt.Sprint(planetVectors[city][1])+", "+fmt.Sprint(planetVectors[city][2])+"\n")
 		}
 
 	}
-	CDeleteLogs(folder)
+	deleteLogs(folder)
 	return logs
 
 }
-func CDeleteLogs(folder string) {
+func deleteLogs(folder string) {
 	e := os.Remove(folder + "Logs.txt")
 	if e != nil {
 		log.Fatal(e)
 
 	}
 }
-func CDeletePlanet(planet string, folder string) bool {
+func deletePlanet(planet string, folder string) bool {
 	e := os.Remove(folder + "Registro_" + planet + ".txt")
-	if e != nil {
-		return false
-	}
-	return true
+	return e == nil
 }
 
 func CMerge(files []string, planetVectors map[string][3]int32, folder string) map[string][3]int32 {
@@ -227,9 +223,9 @@ func CMerge(files []string, planetVectors map[string][3]int32, folder string) ma
 		y, _ := strconv.ParseInt(vector[1], 10, 32)
 		z, _ := strconv.ParseInt(vector[2], 10, 32)
 		planetVectors[planet] = [3]int32{int32(x), int32(y), int32(z)}
-		CDeletePlanet(planet, folder)
+		deletePlanet(planet, folder)
 		filename := "Registro_" + planet + ".txt"
-		for i := 2; i < len(lines)-1; i++ {
+		for i := 2; i < len(lines); i++ {
 			f, err := os.OpenFile(folder+filename, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 			if err != nil {
 				log.Fatal(err)
@@ -251,7 +247,7 @@ func CMerge(files []string, planetVectors map[string][3]int32, folder string) ma
 }
 
 //Actualiza el vector de cambios
-func CUpdateVector(planet string, planetVectors map[string][3]int32, node int32) map[string][3]int32 {
+func updateVector(planet string, planetVectors map[string][3]int32, node int32) map[string][3]int32 {
 	value, check_variable_name := planetVectors[planet]
 	if check_variable_name {
 		switch node {
