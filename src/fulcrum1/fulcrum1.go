@@ -137,7 +137,7 @@ func merge() {
 		logArray := strings.Split(log, "\n")
 
 		// Si el log es válido, se continúa
-		if len(logArray) > 2 {
+		if len(logArray) > 1 {
 			// Se obtiene la operación
 			opArray := strings.Split(logArray[0], " ")
 
