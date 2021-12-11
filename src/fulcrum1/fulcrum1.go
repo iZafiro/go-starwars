@@ -94,7 +94,7 @@ func mergeCronjobs() {
 }
 
 func merge() {
-	fmt.Println("Merge iniciado.")
+	fmt.Println("Started merge.")
 
 	// Se define un arreglo que guardará los planetas que han sido cambiados
 	// en algún fulcrum desde el último merge
