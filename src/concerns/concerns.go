@@ -12,7 +12,7 @@ import (
 )
 
 //Añade una ciudad
-func CAddCity(planet string, city string, value int32, planetVectors map[string][3]int32, folder string, node int32) (bool, map[string][3]int32) {
+func CAddCity(planet string, city string, value int32, planetVectors map[string][3]int32, folder string, node int32, write bool) (bool, map[string][3]int32) {
 	success := true
 	filename := "Registro_" + planet + ".txt"
 	f, err := os.OpenFile(folder+filename, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
@@ -34,26 +34,29 @@ func CAddCity(planet string, city string, value int32, planetVectors map[string]
 	}
 
 	if success {
+		if write {
+			planetVectors = updateVector(planet, planetVectors, node)
+			updateLog("AddCity "+planet+" "+city+" "+fmt.Sprint(value), folder)
+
+		}
 		fmt.Fprintln(f, planet+" "+city+" "+fmt.Sprint(value))
 		if err != nil {
 			fmt.Println(err)
 			return false, map[string][3]int32{}
 		}
-
 		err = f.Close()
 		if err != nil {
 			fmt.Println(err)
 			return false, map[string][3]int32{}
 		}
-		planetVectors = updateVector(planet, planetVectors, node)
-		updateLog("AddCity "+planet+" "+city+" "+fmt.Sprint(value), folder)
+
 	}
 	return success, planetVectors
 
 }
 
 //Actualiza el nombre de una ciudad determinada
-func CUpdateName(planet string, city string, new_value string, planetVectors map[string][3]int32, folder string, node int32) (bool, map[string][3]int32) {
+func CUpdateName(planet string, city string, new_value string, planetVectors map[string][3]int32, folder string, node int32, write bool) (bool, map[string][3]int32) {
 	success := false
 	input, err := ioutil.ReadFile(folder + "Registro_" + planet + ".txt")
 	if err != nil {
@@ -82,7 +85,7 @@ func CUpdateName(planet string, city string, new_value string, planetVectors map
 }
 
 //Actualiza el número de rebeldes en una ciudad determinada
-func CUpdateNumber(planet string, city string, new_value int32, planetVectors map[string][3]int32, folder string, node int32) (bool, map[string][3]int32) {
+func CUpdateNumber(planet string, city string, new_value int32, planetVectors map[string][3]int32, folder string, node int32, write bool) (bool, map[string][3]int32) {
 	success := false
 	input, err := ioutil.ReadFile(folder + "Registro_" + planet + ".txt")
 	if err != nil {
@@ -111,7 +114,7 @@ func CUpdateNumber(planet string, city string, new_value int32, planetVectors ma
 }
 
 //Borra una ciudad determinada
-func CDeleteCity(planet string, city string, planetVectors map[string][3]int32, folder string, node int32) (bool, map[string][3]int32) {
+func CDeleteCity(planet string, city string, planetVectors map[string][3]int32, folder string, node int32, write bool) (bool, map[string][3]int32) {
 	success := false
 	input, err := ioutil.ReadFile(folder + "Registro_" + planet + ".txt")
 	if err != nil {

@@ -17,6 +17,8 @@ var planetVectors map[string][3]int32
 var folder string
 var node int32
 
+var cf2 fulcrumpb.FulcrumServiceClient
+var cf3 fulcrumpb.FulcrumServiceClient
 var s *grpc.Server
 
 func main() {
@@ -36,7 +38,6 @@ func main() {
 		planetVectors = concerns.CMerge([]string{"planeta\n1, 2, 3\nlinea1\nlinea2\n..."}, planetVectors, folder)
 		log.Println(planetVectors)
 	*/
-
 	// Start server
 	fmt.Println("Starting server...")
 	l, err := net.Listen("tcp", "0.0.0.0:50052")
@@ -117,7 +118,7 @@ func (*server) AddCity(ctx context.Context, req *fulcrumpb.AddCityRequest) (*ful
 
 	// Pack response
 	var success bool
-	success, planetVectors = concerns.CAddCity(planet, city, number, planetVectors, folder, node)
+	success, planetVectors = concerns.CAddCity(planet, city, number, planetVectors, folder, node, true)
 	vector := concerns.CGetVector(planet, planetVectors)
 
 	// Send response
@@ -136,7 +137,7 @@ func (*server) UpdateName(ctx context.Context, req *fulcrumpb.UpdateNameRequest)
 
 	// Pack response
 	var success bool
-	success, planetVectors := concerns.CUpdateName(planet, oldCity, newCity, planetVectors, folder, node)
+	success, planetVectors := concerns.CUpdateName(planet, oldCity, newCity, planetVectors, folder, node, true)
 	vector := concerns.CGetVector(planet, planetVectors)
 
 	// Send response
@@ -155,7 +156,7 @@ func (*server) UpdateNumber(ctx context.Context, req *fulcrumpb.UpdateNumberRequ
 
 	// Pack response
 	var success bool
-	success, planetVectors = concerns.CUpdateNumber(planet, city, number, planetVectors, folder, node)
+	success, planetVectors = concerns.CUpdateNumber(planet, city, number, planetVectors, folder, node, true)
 	vector := concerns.CGetVector(planet, planetVectors)
 
 	// Send response
@@ -173,7 +174,7 @@ func (*server) DeleteCity(ctx context.Context, req *fulcrumpb.DeleteCityRequest)
 
 	// Pack response
 	var success bool
-	success, planetVectors = concerns.CDeleteCity(planet, city, planetVectors, folder, node)
+	success, planetVectors = concerns.CDeleteCity(planet, city, planetVectors, folder, node, true)
 	vector := concerns.CGetVector(planet, planetVectors)
 
 	// Send response
