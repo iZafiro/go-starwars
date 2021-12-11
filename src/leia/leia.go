@@ -3,18 +3,14 @@ package main
 import (
 	"context"
 	"fmt"
-	"strings"
-	"strconv"
-	"go-starwars/api/fulcrumpb"
 	"go-starwars/api/brokerpb"
-	"go-starwars/src/concerns"
 	"log"
-	"net"
+	"strings"
 
 	"google.golang.org/grpc"
 )
 
-var cb1 brokerpb.BrokerServiceClient 
+var cb1 brokerpb.BrokerServiceClient
 
 type registry struct {
 	Planet  string
@@ -24,7 +20,7 @@ type registry struct {
 	Fulcrum int
 }
 
-var consistency map[string]registry
+var consistency map[string]*registry
 
 func main() {
 
@@ -41,24 +37,22 @@ func main() {
 	for {
 		fmt.Println("Ingrese comando")
 
-		var input string;
+		var input string
 		fmt.Scanln(&input)
 
-		if input == "end"{
+		if input == "end" {
 			break
-		} else{
+		} else {
 			command := strings.Split(input, " ")
 			if command[0] == "GetNumberRebels" {
-				resistryName := command[1] + " " + command[2]
+				registryName := command[1] + " " + command[2]
 				consistency[registryName].Planet = command[1]
-				succ, num, vec, fulc, := getNumberRebels(command[1], command[2], consistency[command[2].Vector], br1) /////////////////////
+				succ, num := getNum(command[1], command[2], consistency[command[2]].Vector, cb1) /////////////////////
 				if succ {
 					consistency[registryName].City = command[2]
-					consistency[registryName].Rebels = num
-					consistency[registryName].Fulcrum = fulc
-					fmt.Println("En la ciudad %s del planeta %s hay %d\n\n", command[2], command[1], num)
+					fmt.Println("En la ciudad " + command[2] + "del planeta " + command[1] + "hay " + string(num))
 				} else {
-					fmt.Println("La operación no se pudo realizar\n\n")
+					fmt.Println("La operación no se pudo realizar")
 				}
 
 			} else {
@@ -68,20 +62,19 @@ func main() {
 	}
 }
 
-func getNumberRebels(string planet, string city, []int32 vector, br1 brokerpb.BrokerServiceClient) int32 {
-	
+func getNum(planet string, city string, vec []int32, cb1 brokerpb.BrokerServiceClient) (bool, int32) {
+
 	//pack request
 	req := &brokerpb.GetNumberRebelsRequest{
 		Planet: planet,
-		City: city,
-		Vector: vector 
+		City:   city,
+		Vector: vec,
 	}
 
 	//send request
-	res, err := br1.GetNumberRebels(context.Background(), req)
-	if err != nil{
+	res, err := cb1.GetNumberRebels(context.Background(), req)
+	if err != nil {
 		log.Fatalf("Error Call RPC %v", err)
 	}
-	return res.Number
+	return res.Success, res.Number
 }
-
