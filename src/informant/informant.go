@@ -94,18 +94,30 @@ func main() {
 				case 3:
 					cf = cf3
 				}
-
+				var vec []int32
+				num := 0
 				switch command[0] {
 
 				case "AddCity":
-					num := 0
 					if len(command) >= 4 {
 						num, err = strconv.Atoi(command[3])
 					}
-					succ2, vec := addCity(command[1], command[2], int32(num), cf)
-					if !succ2 {
+					succ, vec = addCity(command[1], command[2], int32(num), cf)
 
-					}
+				case "UpdateName":
+					succ, vec = updateName(command[1], command[2], command[3], cf)
+
+				case "UpdateNumber":
+					num, err = strconv.Atoi(command[3])
+					succ, vec = updateNumber(command[1], command[2], int32(num), cf)
+
+				case "DeleteCity":
+					succ, vec = deleteCity(command[1], command[2], cf)
+				}
+
+				if succ {
+					consistency[registryName].Vector = vec
+					fmt.Println("La operación fue exitosa")
 				}
 
 			} else {
@@ -143,6 +155,56 @@ func addCity(planet string, city string, num int32, cf fulcrumpb.FulcrumServiceC
 
 	//send request
 	res, err := cf.AddCity(context.Background(), req)
+	if err != nil {
+		log.Fatalf("Error Call RPC %v", err)
+	}
+	return res.Success, res.Vector
+}
+
+func updateName(planet string, city string, newName string, cf fulcrumpb.FulcrumServiceClient) (bool, []int32) {
+
+	//pack request
+	req := &fulcrumpb.UpdateNameRequest{
+		Planet:  planet,
+		OldCity: city,
+		NewCity: newName,
+	}
+
+	//send request
+	res, err := cf.UpdateName(context.Background(), req)
+	if err != nil {
+		log.Fatalf("Error Call RPC %v", err)
+	}
+	return res.Success, res.Vector
+}
+
+func updateNumber(planet string, city string, num int32, cf fulcrumpb.FulcrumServiceClient) (bool, []int32) {
+
+	//pack request
+	req := &fulcrumpb.UpdateNumberRequest{
+		Planet: planet,
+		City:   city,
+		Number: num,
+	}
+
+	//send request
+	res, err := cf.UpdateNumber(context.Background(), req)
+	if err != nil {
+		log.Fatalf("Error Call RPC %v", err)
+	}
+	return res.Success, res.Vector
+}
+
+func deleteCity(planet string, city string, cf fulcrumpb.FulcrumServiceClient) (bool, []int32) {
+
+	//pack request
+	req := &fulcrumpb.DeleteCityRequest{
+		Planet: planet,
+		City:   city,
+	}
+
+	//send request
+	res, err := cf.DeleteCity(context.Background(), req)
 	if err != nil {
 		log.Fatalf("Error Call RPC %v", err)
 	}
