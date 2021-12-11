@@ -136,7 +136,7 @@ func (*server) UpdateName(ctx context.Context, req *fulcrumpb.UpdateNameRequest)
 
 	// Pack response
 	var success bool
-	success, planetVectors := concerns.CUpdateName(planet, oldCity, newCity, planetVectors, folder, node, true)
+	success, planetVectors = concerns.CUpdateName(planet, oldCity, newCity, planetVectors, folder, node, true)
 	vector := concerns.CGetVector(planet, planetVectors)
 
 	// Send response
