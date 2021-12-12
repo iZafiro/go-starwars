@@ -33,6 +33,8 @@ func main() {
 	defer cc.Close()
 	cb1 = brokerpb.NewBrokerServiceClient(cc)
 
+	consistency = make(map[string]*registry)
+
 	//leia loop
 	for {
 		fmt.Println("Ingrese comando")

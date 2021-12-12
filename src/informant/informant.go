@@ -26,6 +26,7 @@ type registry struct {
 }
 
 var consistency map[string]*registry
+var planetVectors map[string][]int32
 
 func main() {
 
@@ -66,6 +67,7 @@ func main() {
 	cf3 = fulcrumpb.NewFulcrumServiceClient(cc)
 
 	consistency = make(map[string]*registry)
+	planetVectors = make(map[string][]int32)
 
 	//informant loop
 	for {
@@ -86,7 +88,6 @@ func main() {
 				reg := &registry{command[1], command[2], 0, []int32{}, 1}
 				consistency[registryName] = reg
 			}
-
 			succ, fId := getFul(command[1], consistency[registryName].Vector, cb1)
 
 			if succ {
@@ -124,6 +125,7 @@ func main() {
 
 				if succ {
 					consistency[registryName].Vector = vec
+					planetVectors[command[1]] = vec
 					fmt.Println("La operación fue exitosa")
 				} else {
 					fmt.Println("La operación no se pudo realizar")
