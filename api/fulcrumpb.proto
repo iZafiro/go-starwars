@@ -20,6 +20,7 @@ message GetNumberRebelsFulcrumRequest {
 message GetNumberRebelsFulcrumResponse {
     bool success = 1;
     int32 number = 2;
+    repeated int32 vector = 3;
 }
 
 message GetLogsRequest {

@@ -172,7 +172,7 @@ func merge() {
 			}
 
 			// Se actualiza el reloj de vector actual
-			planetVectors[planet] = maxEntries(planetVectors[planet], vector)
+			planetVectors[planet] = maxEntries(concerns.CGetVector(planet, planetVectors), vector)
 
 			// Se añade el planeta al arreglo de planetas que han sido cambiados
 			touchedPlanets = append(touchedPlanets, planet)
@@ -261,10 +261,13 @@ func (*server) GetNumberRebelsFulcrum(ctx context.Context, req *fulcrumpb.GetNum
 	// Pack response
 	success, number := concerns.CGetRebels(planet, city, folder)
 
+	vector := concerns.CGetVector(planet, planetVectors)
+
 	// Send response
 	res := &fulcrumpb.GetNumberRebelsFulcrumResponse{
 		Success: success,
 		Number:  int32(number),
+		Vector:  vector[:],
 	}
 	return res, nil
 }
