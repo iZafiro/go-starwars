@@ -33,6 +33,7 @@ func main() {
 	defer cc.Close()
 	cb1 = brokerpb.NewBrokerServiceClient(cc)
 
+	//initialize mapping
 	consistency = make(map[string]*registry)
 
 	//leia loop
@@ -53,8 +54,8 @@ func main() {
 					reg := &registry{command[1], command[2], 0, []int32{}, 1}
 					consistency[registryName] = reg
 				}
-
-				succ, num, vec := getNum(command[1], command[2], consistency[command[2]].Vector, cb1) /////////////////////
+				//gets number of rebels
+				succ, num, vec := getNum(command[1], command[2], consistency[registryName].Vector, cb1)
 				if succ {
 					fmt.Println("En la ciudad " + command[2] + "del planeta " + command[1] + "hay " + string(num))
 					consistency[registryName].Vector = vec
