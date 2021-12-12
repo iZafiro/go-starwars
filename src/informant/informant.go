@@ -66,6 +66,7 @@ func main() {
 	defer cc.Close()
 	cf3 = fulcrumpb.NewFulcrumServiceClient(cc)
 
+	//inittialize mapping
 	consistency = make(map[string]*registry)
 	planetVectors = make(map[string][]int32)
 
