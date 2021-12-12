@@ -68,6 +68,7 @@ func main() {
 					str := strconv.Itoa(int(num))
 					fmt.Printf("En la ciudad %s del planeta %s hay %s rebeldes\n", command[2], command[1], str)
 					consistency[registryName].Vector = vec
+					planetVectors[command[1]] = vec
 				} else {
 					fmt.Println("La operación no se pudo realizar")
 				}
