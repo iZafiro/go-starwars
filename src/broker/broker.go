@@ -20,20 +20,7 @@ var cf2 fulcrumpb.FulcrumServiceClient
 var cf3 fulcrumpb.FulcrumServiceClient
 var s *grpc.Server
 
-type registry struct {
-	Planet  string
-	City    string
-	Rebels  int
-	Vector  []int32
-	Fulcrum int
-}
-
-var consistency map[string]*registry
-
 func main() {
-
-	consistency = make(map[string]*registry)
-
 	// Connect to fulcrum1 server
 	fmt.Println("Starting Client...")
 	cc, err := grpc.Dial("0.0.0.0:50051", grpc.WithInsecure())

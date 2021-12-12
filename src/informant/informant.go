@@ -81,15 +81,14 @@ func main() {
 			command := strings.Split(string(input), ",")
 			registryName := command[1] + " " + command[2]
 
-			succ, fId := getFul(command[1], consistency[registryName].Vector, cb1)
-
 			//checks if it's already registred
 			if _, ok := consistency[registryName]; !ok {
 				reg := &registry{command[1], command[2], 0, []int32{}, 1}
 				consistency[registryName] = reg
 			}
+
 			succ, fId := getFul(command[1], consistency[registryName].Vector, cb1)
-			
+
 			if succ {
 				//proceeds with command on the correct fulcrumm
 
