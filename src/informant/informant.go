@@ -104,12 +104,12 @@ func main() {
 				}
 				var vec []int32
 				num := 0
+				//logic for each command
 				switch command[0] {
 				case "AddCity":
 					if len(command) >= 4 {
 						num, _ = strconv.Atoi(command[3])
 					}
-					fmt.Println("asd")
 					succ, vec = addCity(command[1], command[2], int32(num), cf)
 
 				case "UpdateName":
@@ -122,7 +122,7 @@ func main() {
 				case "DeleteCity":
 					succ, vec = deleteCity(command[1], command[2], cf)
 				}
-
+				//adds vector to registry
 				if succ {
 					consistency[registryName].Vector = vec
 					planetVectors[command[1]] = vec
