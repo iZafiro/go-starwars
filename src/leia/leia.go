@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"go-starwars/api/brokerpb"
 	"log"
+	"strconv"
 	"strings"
 
 	"google.golang.org/grpc"
@@ -21,6 +22,7 @@ type registry struct {
 }
 
 var consistency map[string]*registry
+var planetVectors map[string][]int32
 
 func main() {
 
@@ -32,6 +34,10 @@ func main() {
 	}
 	defer cc.Close()
 	cb1 = brokerpb.NewBrokerServiceClient(cc)
+
+	//initialize mapping
+	consistency = make(map[string]*registry)
+	planetVectors = make(map[string][]int32)
 
 	//leia loop
 	for {
@@ -46,16 +52,23 @@ func main() {
 			command := strings.Split(string(input), ",")
 			if command[0] == "GetNumberRebels" {
 				registryName := command[1] + " " + command[2]
+
 				//checks if its already registered
 				if _, ok := consistency[registryName]; !ok {
 					reg := &registry{command[1], command[2], 0, []int32{}, 1}
 					consistency[registryName] = reg
 				}
+				if _, ok := planetVectors[command[1]]; !ok {
+					planetVectors[command[1]] = []int32{}
+				}
 
-				succ, num, vec := getNum(command[1], command[2], consistency[command[2]].Vector, cb1) /////////////////////
+				//gets number of rebels
+				succ, num, vec := getNum(command[1], command[2], planetVectors[command[1]], cb1)
 				if succ {
-					fmt.Println("En la ciudad " + command[2] + "del planeta " + command[1] + "hay " + string(num))
+					str := strconv.Itoa(int(num))
+					fmt.Printf("En la ciudad %s del planeta %s hay %s rebeldes\n", command[2], command[1], str)
 					consistency[registryName].Vector = vec
+					planetVectors[command[1]] = vec
 				} else {
 					fmt.Println("La operación no se pudo realizar")
 				}

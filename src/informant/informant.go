@@ -26,6 +26,7 @@ type registry struct {
 }
 
 var consistency map[string]*registry
+var planetVectors map[string][]int32
 
 func main() {
 
@@ -65,7 +66,9 @@ func main() {
 	defer cc.Close()
 	cf3 = fulcrumpb.NewFulcrumServiceClient(cc)
 
+	//inittialize mapping
 	consistency = make(map[string]*registry)
+	planetVectors = make(map[string][]int32)
 
 	//informant loop
 	for {
@@ -86,8 +89,11 @@ func main() {
 				reg := &registry{command[1], command[2], 0, []int32{}, 1}
 				consistency[registryName] = reg
 			}
+			if _, ok := planetVectors[command[1]]; !ok {
+				planetVectors[command[1]] = []int32{}
+			}
 
-			succ, fId := getFul(command[1], consistency[registryName].Vector, cb1)
+			succ, fId := getFul(command[1], planetVectors[command[1]], cb1)
 
 			if succ {
 				//proceeds with command on the correct fulcrumm
@@ -103,12 +109,12 @@ func main() {
 				}
 				var vec []int32
 				num := 0
+				//logic for each command
 				switch command[0] {
 				case "AddCity":
 					if len(command) >= 4 {
 						num, _ = strconv.Atoi(command[3])
 					}
-					fmt.Println("asd")
 					succ, vec = addCity(command[1], command[2], int32(num), cf)
 
 				case "UpdateName":
@@ -121,9 +127,10 @@ func main() {
 				case "DeleteCity":
 					succ, vec = deleteCity(command[1], command[2], cf)
 				}
-
+				//adds vector to registry
 				if succ {
 					consistency[registryName].Vector = vec
+					planetVectors[command[1]] = vec
 					fmt.Println("La operación fue exitosa")
 				} else {
 					fmt.Println("La operación no se pudo realizar")
