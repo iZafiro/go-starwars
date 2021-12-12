@@ -52,9 +52,10 @@ func main() {
 					consistency[registryName] = reg
 				}
 
-				succ, num := getNum(command[1], command[2], consistency[command[2]].Vector, cb1) /////////////////////
+				succ, num, vec := getNum(command[1], command[2], consistency[command[2]].Vector, cb1) /////////////////////
 				if succ {
 					fmt.Println("En la ciudad " + command[2] + "del planeta " + command[1] + "hay " + string(num))
+					consistency[registryName].Vector = vec
 				} else {
 					fmt.Println("La operación no se pudo realizar")
 				}
@@ -66,7 +67,7 @@ func main() {
 	}
 }
 
-func getNum(planet string, city string, vec []int32, cb1 brokerpb.BrokerServiceClient) (bool, int32) {
+func getNum(planet string, city string, vec []int32, cb1 brokerpb.BrokerServiceClient) (bool, int32, []int32) {
 
 	//pack request
 	req := &brokerpb.GetNumberRebelsRequest{
@@ -80,5 +81,5 @@ func getNum(planet string, city string, vec []int32, cb1 brokerpb.BrokerServiceC
 	if err != nil {
 		log.Fatalf("Error Call RPC %v", err)
 	}
-	return res.Success, res.Number
+	return res.Success, res.Number, res.Vector
 }
