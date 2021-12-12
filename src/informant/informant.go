@@ -76,10 +76,13 @@ func main() {
 			break
 		} else {
 			//gets fulcrum Id
-			command := strings.Split(input, " ")
+			command := strings.Split(string(input), ",")
 			registryName := command[1] + " " + command[2]
 			consistency[registryName].Planet = command[1]
 			consistency[registryName].City = command[2]
+
+			consistency[registryName].Vector = []int32{}
+
 			succ, fId := getFul(command[1], consistency[registryName].Vector, cb1)
 
 			if succ {

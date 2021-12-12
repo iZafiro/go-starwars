@@ -189,7 +189,7 @@ func CGetLogs(planetVectors map[string][3]int32, folder string) []string {
 	logs := []string{}
 	input, err := ioutil.ReadFile(folder + "Logs.txt")
 	if err != nil {
-		log.Fatalln(err)
+		return logs
 	}
 
 	lines := strings.Split(string(input), "\n")

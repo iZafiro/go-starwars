@@ -101,11 +101,7 @@ func merge() {
 	touchedPlanets := []string{}
 
 	// Se borran los logs de registro actuales
-	e := os.Remove(folder + "Logs.txt")
-	if e != nil {
-		log.Fatal(e)
-
-	}
+	os.Remove(folder + "Logs.txt")
 
 	// Se piden los logs de registro de los otros dos fulcrum
 	// Pack request
