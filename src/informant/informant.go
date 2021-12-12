@@ -65,6 +65,8 @@ func main() {
 	defer cc.Close()
 	cf3 = fulcrumpb.NewFulcrumServiceClient(cc)
 
+	consistency = make(map[string]*registry)
+
 	//informant loop
 	for {
 		fmt.Println("Ingrese comando")
@@ -76,12 +78,14 @@ func main() {
 			break
 		} else {
 			//gets fulcrum Id
-			command := strings.Split(input, " ")
+			command := strings.Split(string(input), ",")
 			registryName := command[1] + " " + command[2]
-			consistency[registryName].Planet = command[1]
-			consistency[registryName].City = command[2]
+			//checks if it's already registred
+			if _, ok := consistency[registryName]; !ok {
+				reg := &registry{command[1], command[2], 0, []int32{}, 1}
+				consistency[registryName] = reg
+			}
 			succ, fId := getFul(command[1], consistency[registryName].Vector, cb1)
-
 			if succ {
 				//proceeds with command on the correct fulcrumm
 
@@ -97,18 +101,18 @@ func main() {
 				var vec []int32
 				num := 0
 				switch command[0] {
-
 				case "AddCity":
 					if len(command) >= 4 {
-						num, err = strconv.Atoi(command[3])
+						num, _ = strconv.Atoi(command[3])
 					}
+					fmt.Println("asd")
 					succ, vec = addCity(command[1], command[2], int32(num), cf)
 
 				case "UpdateName":
 					succ, vec = updateName(command[1], command[2], command[3], cf)
 
 				case "UpdateNumber":
-					num, err = strconv.Atoi(command[3])
+					num, _ = strconv.Atoi(command[3])
 					succ, vec = updateNumber(command[1], command[2], int32(num), cf)
 
 				case "DeleteCity":
@@ -118,6 +122,8 @@ func main() {
 				if succ {
 					consistency[registryName].Vector = vec
 					fmt.Println("La operación fue exitosa")
+				} else {
+					fmt.Println("La operación no se pudo realizar")
 				}
 
 			} else {
