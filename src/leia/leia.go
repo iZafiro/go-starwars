@@ -64,7 +64,7 @@ func main() {
 				//gets number of rebels
 				succ, num, vec := getNum(command[1], command[2], planetVectors[command[1]], cb1)
 				if succ {
-					fmt.Println("En la ciudad " + command[2] + "del planeta " + command[1] + "hay " + string(num))
+					fmt.Printf("En la ciudad %v del planeta %v hay %v rebeldes\n", command[2], command[1], string(num))
 					consistency[registryName].Vector = vec
 				} else {
 					fmt.Println("La operación no se pudo realizar")
