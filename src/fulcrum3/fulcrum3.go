@@ -72,10 +72,12 @@ func (*server) GetNumberRebelsFulcrum(ctx context.Context, req *fulcrumpb.GetNum
 	// Pack response
 	success, number := concerns.CGetRebels(planet, city, folder)
 
+	vector := concerns.CGetVector(planet, planetVectors)
 	// Send response
 	res := &fulcrumpb.GetNumberRebelsFulcrumResponse{
 		Success: success,
 		Number:  int32(number),
+		Vector:  vector[:],
 	}
 	return res, nil
 }

@@ -241,9 +241,11 @@ func (*server) GetNumberRebels(ctx context.Context, req *brokerpb.GetNumberRebel
 
 		if res.Success {
 			number = res.Number
+			vector = res.Vector
 		} else {
 			success = false
 			number = res.Number
+			vector = res.Vector
 		}
 	case 2:
 		// Pack request
@@ -260,9 +262,11 @@ func (*server) GetNumberRebels(ctx context.Context, req *brokerpb.GetNumberRebel
 
 		if res.Success {
 			number = res.Number
+			vector = res.Vector
 		} else {
 			success = false
 			number = res.Number
+			vector = res.Vector
 		}
 	case 3:
 		// Pack request
@@ -279,19 +283,23 @@ func (*server) GetNumberRebels(ctx context.Context, req *brokerpb.GetNumberRebel
 
 		if res.Success {
 			number = res.Number
+			vector = res.Vector
 		} else {
 			success = false
 			number = res.Number
+			vector = res.Vector
 		}
 	default:
 		success = false
 		number = -1
+		vector = []int32{}
 	}
 
 	// Send response
 	res := &brokerpb.GetNumberRebelsResponse{
 		Success: success,
 		Number:  int32(number),
+		Vector:  vector,
 	}
 	return res, nil
 }
