@@ -87,8 +87,11 @@ func main() {
 			if _, ok := consistency[registryName]; !ok {
 				reg := &registry{command[1], command[2], 0, []int32{}, 1}
 				consistency[registryName] = reg
+			}
+			if _, ok := planetVectors[command[1]]; !ok {
 				planetVectors[command[1]] = []int32{}
 			}
+
 			succ, fId := getFul(command[1], planetVectors[command[1]], cb1)
 
 			if succ {
