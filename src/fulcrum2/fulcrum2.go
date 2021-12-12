@@ -175,6 +175,8 @@ func (*server) DeleteCity(ctx context.Context, req *fulcrumpb.DeleteCityRequest)
 	planet := req.GetPlanet()
 	city := req.GetCity()
 
+	println(planet, city)
+
 	// Pack response
 	var success bool
 	success, planetVectors = concerns.CDeleteCity(planet, city, planetVectors, folder, node, true)

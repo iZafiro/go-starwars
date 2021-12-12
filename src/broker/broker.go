@@ -153,6 +153,16 @@ func (*server) GetFulcrum(ctx context.Context, req *brokerpb.GetFulcrumRequest) 
 	return res, nil
 }
 
+func isZeroVector(vector []int32) bool {
+	flag := true
+	for _, entry := range vector {
+		if entry != 0 {
+			flag = false
+		}
+	}
+	return flag
+}
+
 func (*server) GetNumberRebels(ctx context.Context, req *brokerpb.GetNumberRebelsRequest) (*brokerpb.GetNumberRebelsResponse, error) {
 	// Unpack request
 	planet := req.GetPlanet()
@@ -160,6 +170,12 @@ func (*server) GetNumberRebels(ctx context.Context, req *brokerpb.GetNumberRebel
 	vector := req.GetVector()
 
 	fmt.Println(planet, city, vector)
+
+	// Para simplificar las comparaciones, el reloj de vector por defecto de Leia
+	// es el vector nulo
+	if len(vector) < 3 {
+		vector = []int32{0, 0, 0}
+	}
 
 	var fulcrumId int
 	var number int32
@@ -169,55 +185,49 @@ func (*server) GetNumberRebels(ctx context.Context, req *brokerpb.GetNumberRebel
 	validFulcrum := []int{}
 
 	success := true
-
-	// Si Leia ha consultado el registro antes, entonces
-	// busca los fulcrum con vectores más recientes.
-	if len(vector) > 0 {
-		// Pack request
-		reqf := &fulcrumpb.GetVectorRequest{
-			Planet: planet,
-		}
-
-		// Send request
-		res, err := cf1.GetVector(context.Background(), reqf)
-		if err != nil {
-			log.Fatalf("Error Call RPC: %v", err)
-		}
-
-		if vectorLeq(vector, res.Vector) {
-			validFulcrum = append(validFulcrum, 1)
-		}
-
-		// Send request
-		res, err = cf2.GetVector(context.Background(), reqf)
-		if err != nil {
-			log.Fatalf("Error Call RPC: %v", err)
-		}
-
-		if vectorLeq(vector, res.Vector) {
-			validFulcrum = append(validFulcrum, 2)
-		}
-
-		// Send request
-		res, err = cf3.GetVector(context.Background(), reqf)
-		if err != nil {
-			log.Fatalf("Error Call RPC: %v", err)
-		}
-
-		if vectorLeq(vector, res.Vector) {
-			validFulcrum = append(validFulcrum, 3)
-		}
-
-		if len(validFulcrum) <= 0 {
-			success = false
-		}
+	// Revisa todos los fulcrum que tienen información sobre el planeta
+	// Pack request
+	reqf := &fulcrumpb.GetVectorRequest{
+		Planet: planet,
 	}
 
-	// Si encontró un fulcrum con un vector más reciente, entonces
+	// Send request
+	res, err := cf1.GetVector(context.Background(), reqf)
+	if err != nil {
+		log.Fatalf("Error Call RPC: %v", err)
+	}
+
+	if !isZeroVector(res.Vector) && vectorLeq(vector, res.Vector) {
+		validFulcrum = append(validFulcrum, 1)
+	}
+
+	// Send request
+	res, err = cf2.GetVector(context.Background(), reqf)
+	if err != nil {
+		log.Fatalf("Error Call RPC: %v", err)
+	}
+
+	if !isZeroVector(res.Vector) && vectorLeq(vector, res.Vector) {
+		validFulcrum = append(validFulcrum, 2)
+	}
+
+	// Send request
+	res, err = cf3.GetVector(context.Background(), reqf)
+	if err != nil {
+		log.Fatalf("Error Call RPC: %v", err)
+	}
+
+	if !isZeroVector(res.Vector) && vectorLeq(vector, res.Vector) {
+		validFulcrum = append(validFulcrum, 3)
+	}
+
+	if len(validFulcrum) <= 0 {
+		success = false
+	}
+
+	// Si encontró un fulcrum con un reloj de vector más reciente, entonces
 	// elige uno de estos al azar.
-	// Si no, (es decir, si Leia no había consultado el registro antes,
-	// o si no encontró un fulcrum con un vector más reciente), entonces
-	// elige un fulcrum al azar.
+	// Si no, entonces elige un fulcrum al azar.
 	if len(validFulcrum) > 0 {
 		fulcrumId = validFulcrum[rand.Intn(len(validFulcrum))]
 	} else {
@@ -296,10 +306,10 @@ func (*server) GetNumberRebels(ctx context.Context, req *brokerpb.GetNumberRebel
 	}
 
 	// Send response
-	res := &brokerpb.GetNumberRebelsResponse{
+	resb := &brokerpb.GetNumberRebelsResponse{
 		Success: success,
 		Number:  int32(number),
 		Vector:  vector,
 	}
-	return res, nil
+	return resb, nil
 }
