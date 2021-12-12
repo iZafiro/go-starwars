@@ -159,6 +159,7 @@ func CDeleteCity(planet string, city string, planetVectors map[string][3]int32, 
 
 // Obtiene la cantidad de rebeldes en una ciudad determinada
 func CGetRebels(planet string, city string, folder string) (bool, int32) {
+	success := false
 	rebels := int32(-1)
 	// Se abre el archivo de registro del planeta, si no existe se retorna false y el valor por defecto -1 que indica error
 	input, err := ioutil.ReadFile(folder + "Registro_" + planet + ".txt")
@@ -172,10 +173,11 @@ func CGetRebels(planet string, city string, folder string) (bool, int32) {
 		if strings.Contains(line, city) {
 			aux, _ := strconv.ParseInt(strings.Split(lines[i], " ")[2], 10, 32)
 			rebels = int32(aux)
+			success = true
 		}
 	}
 	// Se retorna un booleano que indica si la operación fue exitosa y la cantidad de rebeldes
-	return true, rebels
+	return success, rebels
 
 }
 
