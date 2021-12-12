@@ -28,8 +28,9 @@ var s *grpc.Server
 
 func main() {
 	planetVectors = make(map[string][3]int32)
-	folder = "out/"
+	folder = "src/fulcrum1/out/"
 	node = int32(1)
+	concerns.CRemoveContents("src/fulcrum1/out")
 	/*
 		Local test
 		concerns.CRemoveContents("out")
