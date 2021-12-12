@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"go-starwars/api/brokerpb"
 	"log"
+	"strconv"
 	"strings"
 
 	"google.golang.org/grpc"
@@ -64,7 +65,8 @@ func main() {
 				//gets number of rebels
 				succ, num, vec := getNum(command[1], command[2], planetVectors[command[1]], cb1)
 				if succ {
-					fmt.Printf("En la ciudad %s del planeta %s hay %s rebeldes\n", command[2], command[1], string(num))
+					str := strconv.Itoa(int(num))
+					fmt.Printf("En la ciudad %s del planeta %s hay %s rebeldes\n", command[2], command[1], str)
 					consistency[registryName].Vector = vec
 				} else {
 					fmt.Println("La operación no se pudo realizar")
