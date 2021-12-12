@@ -46,10 +46,14 @@ func main() {
 			command := strings.Split(string(input), ",")
 			if command[0] == "GetNumberRebels" {
 				registryName := command[1] + " " + command[2]
-				consistency[registryName].Planet = command[1]
+				//checks if its already registered
+				if _, ok := consistency[registryName]; !ok {
+					reg := &registry{command[1], command[2], 0, []int32{}, 1}
+					consistency[registryName] = reg
+				}
+
 				succ, num := getNum(command[1], command[2], consistency[command[2]].Vector, cb1) /////////////////////
 				if succ {
-					consistency[registryName].City = command[2]
 					fmt.Println("En la ciudad " + command[2] + "del planeta " + command[1] + "hay " + string(num))
 				} else {
 					fmt.Println("La operación no se pudo realizar")
