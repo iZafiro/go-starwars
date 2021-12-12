@@ -80,11 +80,19 @@ func main() {
 			//gets fulcrum Id
 			command := strings.Split(string(input), ",")
 			registryName := command[1] + " " + command[2]
+<<<<<<< HEAD
 			//checks if it's already registred
 			if _, ok := consistency[registryName]; !ok {
 				reg := &registry{command[1], command[2], 0, []int32{}, 1}
 				consistency[registryName] = reg
 			}
+=======
+			consistency[registryName].Planet = command[1]
+			consistency[registryName].City = command[2]
+
+			consistency[registryName].Vector = []int32{}
+
+>>>>>>> e20dc7232436650578a3823cdec6ab27a9efd3c8
 			succ, fId := getFul(command[1], consistency[registryName].Vector, cb1)
 			if succ {
 				//proceeds with command on the correct fulcrumm

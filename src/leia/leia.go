@@ -43,7 +43,7 @@ func main() {
 		if input == "end" {
 			break
 		} else {
-			command := strings.Split(input, " ")
+			command := strings.Split(string(input), ",")
 			if command[0] == "GetNumberRebels" {
 				registryName := command[1] + " " + command[2]
 				//checks if its already registered
