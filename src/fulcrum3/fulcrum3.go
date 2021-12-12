@@ -13,8 +13,11 @@ import (
 
 type server struct{}
 
+// Relojes de vector
 var planetVectors map[string][3]int32
 var folder string
+
+// Número de servidor
 var node int32
 
 var s *grpc.Server
@@ -24,19 +27,6 @@ func main() {
 	folder = "src/fulcrum3/out/"
 	node = int32(3)
 	concerns.CRemoveContents("src/fulcrum3/out")
-	/*
-		Local test
-		concerns.CRemoveContents("out")
-		_, planetVectors = concerns.CAddCity("planeta", "uwu", int32(100), planetVectors, folder, node)
-		_, planetVectors = concerns.CUpdateName("planeta", "uwu", "awa", planetVectors, folder, node)
-		_, planetVectors = concerns.CUpdateNumber("planeta", "awa", int32(50), planetVectors, folder, node)
-		_, planetVectors = concerns.CAddCity("planeta", "owo", int32(100), planetVectors, folder, node)
-		_, planetVectors = concerns.CAddCity("planeta", "iwi", int32(100), planetVectors, folder, node)
-		_, planetVectors = concerns.CAddCity("planeta2", "xd", int32(100), planetVectors, folder, node)
-		_, planetVectors = concerns.CDeleteCity("planeta", "awa", planetVectors, folder, node)
-		planetVectors = concerns.CMerge([]string{"planeta\n1, 2, 3\nlinea1\nlinea2\n..."}, planetVectors, folder)
-		log.Println(planetVectors)
-	*/
 
 	// Start server
 	fmt.Println("Starting server...")
