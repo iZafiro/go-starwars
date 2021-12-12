@@ -21,6 +21,7 @@ type registry struct {
 }
 
 var consistency map[string]*registry
+var planetVectors map[string][]int32
 
 func main() {
 
@@ -35,6 +36,7 @@ func main() {
 
 	//initialize mapping
 	consistency = make(map[string]*registry)
+	planetVectors = make(map[string][]int32)
 
 	//leia loop
 	for {
@@ -49,11 +51,16 @@ func main() {
 			command := strings.Split(string(input), ",")
 			if command[0] == "GetNumberRebels" {
 				registryName := command[1] + " " + command[2]
+
 				//checks if its already registered
 				if _, ok := consistency[registryName]; !ok {
 					reg := &registry{command[1], command[2], 0, []int32{}, 1}
 					consistency[registryName] = reg
 				}
+				if _, ok := planetVectors[command[1]]; !ok {
+					planetVectors[command[1]] = []int32{}
+				}
+
 				//gets number of rebels
 				succ, num, vec := getNum(command[1], command[2], consistency[registryName].Vector, cb1)
 				if succ {
