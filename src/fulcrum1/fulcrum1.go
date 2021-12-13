@@ -22,6 +22,9 @@ type server struct{}
 var planetVectors map[string][3]int32
 var folder string
 
+// Planetas que han sido cambiados desde el último merge
+var touchedPlanets []string
+
 // Número de servidor
 var node int32
 
@@ -32,6 +35,7 @@ var s *grpc.Server
 func main() {
 	planetVectors = make(map[string][3]int32)
 	folder = "src/fulcrum1/out/"
+	touchedPlanets = []string{}
 	node = int32(1)
 	concerns.CRemoveContents("src/fulcrum1/out")
 
@@ -87,10 +91,6 @@ func mergeCronjobs() {
 
 func merge() {
 	fmt.Println("Started merge.")
-
-	// Se define un arreglo que guardará los planetas que han sido cambiados
-	// en algún fulcrum desde el último merge
-	touchedPlanets := []string{}
 
 	// Se borran los logs de registro actuales
 	os.Remove(folder + "Logs.txt")
@@ -178,7 +178,9 @@ func merge() {
 	for _, planet := range touchedPlanets {
 		vectorString := ""
 
-		for index, entry := range planetVectors[planet] {
+		pv := concerns.CGetVector(planet, planetVectors)
+
+		for index, entry := range pv {
 			vectorString += string(entry)
 			if index < 2 {
 				vectorString += ", "
@@ -192,6 +194,9 @@ func merge() {
 
 		files = append(files, planet+"\n"+vectorString+"\n"+string(input))
 	}
+
+	// Se vuelve a inicializar el arreglo de planetas cambiados
+	touchedPlanets = []string{}
 
 	// Pack request
 	reqm := &fulcrumpb.MergeRequest{
@@ -304,6 +309,11 @@ func (*server) AddCity(ctx context.Context, req *fulcrumpb.AddCityRequest) (*ful
 	success, planetVectors = concerns.CAddCity(planet, city, number, planetVectors, folder, node, true)
 	vector := concerns.CGetVector(planet, planetVectors)
 
+	// Se añade el planeta al arreglo de planetas cambiados desde el último merge
+	if success {
+		touchedPlanets = append(touchedPlanets, planet)
+	}
+
 	// Send response
 	res := &fulcrumpb.AddCityResponse{
 		Success: success,
@@ -322,6 +332,11 @@ func (*server) UpdateName(ctx context.Context, req *fulcrumpb.UpdateNameRequest)
 	var success bool
 	success, planetVectors = concerns.CUpdateName(planet, oldCity, newCity, planetVectors, folder, node, true)
 	vector := concerns.CGetVector(planet, planetVectors)
+
+	// Se añade el planeta al arreglo de planetas cambiados desde el último merge
+	if success {
+		touchedPlanets = append(touchedPlanets, planet)
+	}
 
 	// Send response
 	res := &fulcrumpb.UpdateNameResponse{
@@ -342,6 +357,11 @@ func (*server) UpdateNumber(ctx context.Context, req *fulcrumpb.UpdateNumberRequ
 	success, planetVectors = concerns.CUpdateNumber(planet, city, number, planetVectors, folder, node, true)
 	vector := concerns.CGetVector(planet, planetVectors)
 
+	// Se añade el planeta al arreglo de planetas cambiados desde el último merge
+	if success {
+		touchedPlanets = append(touchedPlanets, planet)
+	}
+
 	// Send response
 	res := &fulcrumpb.UpdateNumberResponse{
 		Success: success,
@@ -361,6 +381,11 @@ func (*server) DeleteCity(ctx context.Context, req *fulcrumpb.DeleteCityRequest)
 	var success bool
 	success, planetVectors = concerns.CDeleteCity(planet, city, planetVectors, folder, node, true)
 	vector := concerns.CGetVector(planet, planetVectors)
+
+	// Se añade el planeta al arreglo de planetas cambiados desde el último merge
+	if success {
+		touchedPlanets = append(touchedPlanets, planet)
+	}
 
 	// Send response
 	res := &fulcrumpb.DeleteCityResponse{
