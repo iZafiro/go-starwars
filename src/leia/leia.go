@@ -26,9 +26,9 @@ var planetVectors map[string][]int32
 
 func main() {
 
-	// Connect to fulcrum3 server
+	// Connect to broker server
 	fmt.Println("Starting Client...")
-	cc, err := grpc.Dial("0.0.0.0:50050", grpc.WithInsecure())
+	cc, err := grpc.Dial("10.6.43.57:50053", grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("Could not connect: %v", err)
 	}

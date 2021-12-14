@@ -46,7 +46,7 @@ func main() {
 	*/
 	// Connect to fulcrum2 server
 	fmt.Println("Starting Client...")
-	cc, err := grpc.Dial("0.0.0.0:50052", grpc.WithInsecure())
+	cc, err := grpc.Dial("10.6.43.59:50055", grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("Could not connect: %v", err)
 	}
@@ -55,7 +55,7 @@ func main() {
 
 	// Connect to fulcrum3 server
 	fmt.Println("Starting Client...")
-	cc, err = grpc.Dial("0.0.0.0:50053", grpc.WithInsecure())
+	cc, err = grpc.Dial("10.6.43.60:50052", grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("Could not connect: %v", err)
 	}
@@ -67,7 +67,7 @@ func main() {
 
 	// Start server
 	fmt.Println("Starting server...")
-	l, err := net.Listen("tcp", "0.0.0.0:50051")
+	l, err := net.Listen("tcp", "0.0.0.0:50054")
 	if err != nil {
 		log.Fatalf("Failed to listen %v", err)
 	}
