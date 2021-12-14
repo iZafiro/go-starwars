@@ -32,7 +32,7 @@ func main() {
 
 	// Connect to broker server
 	fmt.Println("Starting Client...")
-	cc, err := grpc.Dial("0.0.0.0:50050", grpc.WithInsecure())
+	cc, err := grpc.Dial("10.6.43.57:50053", grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("Could not connect: %v", err)
 	}
@@ -41,7 +41,7 @@ func main() {
 
 	// Connect to fulcrum1 server
 	fmt.Println("Starting Client...")
-	cc, err = grpc.Dial("0.0.0.0:50051", grpc.WithInsecure())
+	cc, err = grpc.Dial("10.6.43.58:50054", grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("Could not connect: %v", err)
 	}
@@ -50,7 +50,7 @@ func main() {
 
 	// Connect to fulcrum2 server
 	fmt.Println("Starting Client...")
-	cc, err = grpc.Dial("0.0.0.0:50052", grpc.WithInsecure())
+	cc, err = grpc.Dial("10.6.43.59:50055", grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("Could not connect: %v", err)
 	}
@@ -59,7 +59,7 @@ func main() {
 
 	// Connect to fulcrum3 server
 	fmt.Println("Starting Client...")
-	cc, err = grpc.Dial("0.0.0.0:50053", grpc.WithInsecure())
+	cc, err = grpc.Dial("10.6.43.60:50052", grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("Could not connect: %v", err)
 	}

@@ -30,7 +30,7 @@ func main() {
 
 	// Start server
 	fmt.Println("Starting server...")
-	l, err := net.Listen("tcp", "0.0.0.0:50052")
+	l, err := net.Listen("tcp", "0.0.0.0:50055")
 	if err != nil {
 		log.Fatalf("Failed to listen %v", err)
 	}
